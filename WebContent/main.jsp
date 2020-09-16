@@ -8,7 +8,7 @@
 	</head>
 	<body>
 	<h1>Lista de Tasks</h1>
-		<%@ page import="java.util.*,br.edu.insper.* %>
+		<%@ page import="java.util.*,br.edu.insper.*" %>
 		<table border='1'>
 			<tr>
 				<td> Tasks </td>
@@ -21,8 +21,6 @@
 			 		<td>
 				 		<form action='Atualiza'>
 				 			<input type='hidden' name='id' value=<%=task.getId() %>>
-				 			<%String taskResp = task.getTask() %>
-				 			<input type='hidden' name='task' value=<%=taskResp %>>
 							<input type='submit' value="Atualiza Task">
 						</form>
 					</td>

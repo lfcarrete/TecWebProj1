@@ -33,10 +33,10 @@ public class Atualiza extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		PrintWriter out = response.getWriter();
-		String resp = request.getParameter("task");
+		
 		out.println("<html><body>");
 		out.println("<form method='post'>");
-		out.println("Task: <input type='text' value="+ resp + " name = 'task'><br>");
+		out.println("Task: <input type='text' name='task'><br>");
 		out.println("<input type='submit' value='Atualizar'>");
 		out.println("</form>");
 		out.println("</html></body>");
