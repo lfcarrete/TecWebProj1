@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -50,17 +51,12 @@ public class Lista extends HttpServlet {
 			
 			List<Task> tasks = dao.getLista();
 			
-			PrintWriter out = response.getWriter();
-			out.println("<html><body><table border='1'>");
-			out.println("<tr><td>ID</td><td>Task</td></tr>");
-			
-			for (Task task : tasks) {
-				out.println("<tr><td>"+task.getId()+"</td><td>"+task.getTask()+"</td></tr>");
-			}
-			
-			out.println("</table></body></html>");
-			
 			dao.close();
+			
+			request.setAttribute("tasks", tasks);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/main.jsp");
+			dispatcher.forward(request, response);
+		
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

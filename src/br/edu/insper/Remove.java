@@ -3,6 +3,7 @@ package br.edu.insper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,9 +44,12 @@ public class Remove extends HttpServlet {
 			dao = new DAO();
 			dao.remove(Integer.valueOf(request.getParameter("id")));
 			
+			List<Task> tasks = dao.getLista();
+			
 			dao.close();
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
+			request.setAttribute("tasks", tasks);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/main.jsp");
 			dispatcher.forward(request, response);
 			
 		} catch (ClassNotFoundException e) {

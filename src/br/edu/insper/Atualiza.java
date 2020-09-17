@@ -3,6 +3,7 @@ package br.edu.insper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -58,9 +59,12 @@ public class Atualiza extends HttpServlet {
 			
 			dao.altera(task);
 			
+			List<Task> tasks = dao.getLista();
+			
+			request.setAttribute("tasks", tasks);
 			dao.close();
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/views/main.jsp");
 			dispatcher.forward(request, response);
 			
 			
