@@ -8,25 +8,42 @@
 	<head>
 		<meta charset="UFT-8">
 		<title>Exemplo de JSP</title>
+		<style>
+			body {
+				background-color:#dddddd;
+			}
+			
+			table {
+				border-collapse: collapse;
+				width: 100%;
+			}
+			
+			
+			tr:hover {background-color:#f5f5f5;}
+		</style>
 	</head>
 	<body>
-	<h1>Lista de Tasks</h1>
-		<table border='1'>
+	
+	<h1 align="center">Lista de Tasks</h1>
+	
+		<table style="border-collapse: collapse; width: 100%; margin-bottom:50px;">
+	  		
+	  		
 			<tr>
-				<td> Tasks </td>
+				<td style="font-size:150%; font-weight: bold;"> Tasks </td>
 			</tr>
 		
 			
 			<c:forEach var="task" items="${tasks}">
 			 	<tr>
-			 		<td>${task.task}</td>
-			 		<td>
+			 		<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;">${task.task}</td>
+			 		<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;">
 				 		<form action='Atualiza'>
 				 			<input type='hidden' name='id' value=${task.id}>
 							<input type='submit' value="Atualiza Task">
 						</form>
 					</td>
-					<td>
+					<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;">
 				 		<form action='Remove' method='post'>
 				 			<input type='hidden' name='id' value=${task.id}>
 							<input type='submit' value="Remove Task">

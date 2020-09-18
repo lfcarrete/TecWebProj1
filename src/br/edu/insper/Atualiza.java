@@ -33,14 +33,9 @@ public class Atualiza extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		PrintWriter out = response.getWriter();
-		
-		out.println("<html><body>");
-		out.println("<form method='post'>");
-		out.println("Task: <input type='text' name='task'><br>");
-		out.println("<input type='submit' value='Atualizar'>");
-		out.println("</form>");
-		out.println("</html></body>");
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/views/atualiza.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
