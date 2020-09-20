@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta charset="UFT-8">
-		<title>Exemplo de JSP</title>
+		<title>Lista Tasks</title>
 		<style>
 			body {
 				background-color:#dddddd;
@@ -31,12 +31,15 @@
 	  		
 			<tr>
 				<td style="font-size:150%; font-weight: bold;"> Tasks </td>
+				<td style="font-size:150%; font-weight: bold;"> Data de Criação </td>
 			</tr>
 		
 			
 			<c:forEach var="task" items="${tasks}">
 			 	<tr>
 			 		<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;">${task.task}</td>
+			 		<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;">${task.date.getTime()}</td>
+			 		
 			 		<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;">
 				 		<form action='Atualiza'>
 				 			<input type='hidden' name='id' value=${task.id}>

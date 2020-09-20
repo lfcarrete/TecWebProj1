@@ -54,7 +54,7 @@ public class Lista extends HttpServlet {
 			dao.close();
 			
 			request.setAttribute("tasks", tasks);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/main.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/lista.jsp");
 			dispatcher.forward(request, response);
 		
 		} catch (ClassNotFoundException e) {

@@ -1,10 +1,12 @@
 package br.edu.insper;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class DAO {
@@ -26,6 +28,9 @@ public class DAO {
 			Task task = new Task();
 			task.setId(rs.getInt("id"));
 			task.setTask(rs.getString("task"));
+			Calendar date = Calendar.getInstance();
+			date.setTime(rs.getDate("criado"));
+			task.setDate(date);
 			tasks.add(task);
 		}
 		
@@ -36,9 +41,12 @@ public class DAO {
 	}
 	
 	public void adiciona (Task task) throws SQLException {
-		String sql = "INSERT INTO tasks (task) VALUES (?)";
+		String sql = "INSERT INTO tasks (task, criado) VALUES (?,?)";
 		PreparedStatement stmt = connection.prepareStatement(sql);
 		stmt.setNString(1, task.getTask());
+		long millis=System.currentTimeMillis();
+		java.sql.Date date=new java.sql.Date(millis);
+		stmt.setDate(2,date);
 		stmt.execute();
 		stmt.close();
 	}
@@ -64,4 +72,7 @@ public class DAO {
 	public void close () throws SQLException {
 		connection.close();
 	}
+	
+	//login
+	
 }

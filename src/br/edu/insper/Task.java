@@ -1,8 +1,11 @@
 package br.edu.insper;
 
+import java.util.Calendar;
+
 public class Task {
 	private Integer id;
 	private String task;
+	private Calendar date;
 	
 	
 	public Integer getId() {
@@ -16,6 +19,12 @@ public class Task {
 	}
 	public void setTask(String task) {
 		this.task = task;
+	}
+	public Calendar getDate() {
+		return date;
+	}
+	public void setDate(Calendar date) {
+		this.date = date;
 	}
 
 }

@@ -2,7 +2,11 @@ package br.edu.insper;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -46,8 +50,11 @@ public class Cria extends HttpServlet {
 			dao = new DAO();
 			Task task = new Task();
 			task.setTask(request.getParameter("task"));
-			
-			dao.adiciona(task);
+			if(request.getParameter("task").length() != 0) {
+				
+				dao.adiciona(task);
+			}
+	
 			
 			List<Task> tasks = dao.getLista();
 			
@@ -55,7 +62,7 @@ public class Cria extends HttpServlet {
 			
 			dao.close();
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/main.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/lista.jsp");
 			dispatcher.forward(request, response);
 			
 			
