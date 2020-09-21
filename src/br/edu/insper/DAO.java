@@ -39,6 +39,23 @@ public class DAO {
 		
 		return tasks;
 	}
+	public List<User> getUsers() throws SQLException{
+		List<User> users = new ArrayList<User>();
+		PreparedStatement stmt = connection.prepareStatement("SELECT * FROM users");
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			User user = new User();
+			user.setId(rs.getInt("id"));
+			user.setUser(rs.getString("user"));
+			user.setPassword(rs.getString("password"));
+			users.add(user);
+		}
+		rs.close();
+		stmt.close();
+		
+		return users;
+	}
 	
 	public void adiciona (Task task) throws SQLException {
 		String sql = "INSERT INTO tasks (task, criado) VALUES (?,?)";
@@ -72,7 +89,5 @@ public class DAO {
 	public void close () throws SQLException {
 		connection.close();
 	}
-	
-	//login
 	
 }

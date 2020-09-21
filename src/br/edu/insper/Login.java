@@ -1,6 +1,8 @@
 package br.edu.insper;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,8 +41,45 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("Lista");
-		dispatcher.forward(request, response);
+		DAO dao;
+		try {
+			dao = new DAO();
+			
+			String localUser = request.getParameter("user");
+			String localPassword = request.getParameter("password");
+			boolean confirm = false;
+			List<User> users = dao.getUsers();
+			
+			
+			for(User user : users) {
+				System.out.println(user.getUser().equals(localUser));
+				System.out.println(user.getPassword().equals(localPassword));
+				if(user.getUser().equals(localUser) && user.getPassword().equals(localPassword)) {
+				confirm = true;
+				System.out.println("Usuario Confirmado");
+				}
+			}
+			 
+			
+			if(confirm) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("Lista");
+				dispatcher.forward(request, response);
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/views/login.jsp");
+				dispatcher.forward(request, response);
+			}
+			
+			
+			dao.close();
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

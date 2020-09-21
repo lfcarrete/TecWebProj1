@@ -24,4 +24,4 @@ INSERT INTO tasks(task, criado) VALUES ('PFE', '20400302');
 CREATE TABLE users(id INT NOT NULL AUTO_INCREMENT, user VARCHAR(32), password VARCHAR(32), PRIMARY KEY (id));
 
 //Popula Tabela
-INSERT INTO users(user, password) VALUES (Bob123, 123)
+INSERT INTO users(user, password) VALUES ('Bob123', '123');

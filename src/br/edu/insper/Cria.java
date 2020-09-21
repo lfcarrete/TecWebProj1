@@ -36,8 +36,7 @@ public class Cria extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/cria.jsp");
-		dispatcher.forward(request, response);
+		
 	}
 
 	/**
@@ -49,8 +48,8 @@ public class Cria extends HttpServlet {
 		try {
 			dao = new DAO();
 			Task task = new Task();
-			task.setTask(request.getParameter("task"));
-			if(request.getParameter("task").length() != 0) {
+			task.setTask(request.getParameter("newtask"));
+			if(request.getParameter("newtask").length() != 0) {
 				
 				dao.adiciona(task);
 			}

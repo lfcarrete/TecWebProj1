@@ -54,10 +54,19 @@
 					</td>
 			 	</tr>
 			</c:forEach>
+			<tr>
+				<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;">
+				<form action='Cria' method='post'>
+						<input type="text" name="newtask" placeholder="New Task" required>	
+						<input type='submit' value="Cria Task">
+				</form>
+				</td>
+				<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;"></td>
+				<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;"></td>
+				<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;">	
+				</td>
+			</tr>
 		</table>
-		<form action='Cria'>
-			<input type='submit' value="Cria Task">
-		</form>
 		
 	</body>
 </html>
