@@ -31,6 +31,7 @@ public class DAO {
 			Calendar date = Calendar.getInstance();
 			date.setTime(rs.getDate("criado"));
 			task.setDate(date);
+			task.setUser(rs.getString("autor"));
 			tasks.add(task);
 		}
 		
@@ -58,12 +59,13 @@ public class DAO {
 	}
 	
 	public void adiciona (Task task) throws SQLException {
-		String sql = "INSERT INTO tasks (task, criado) VALUES (?,?)";
+		String sql = "INSERT INTO tasks (task, criado, autor) VALUES (?,?, ?)";
 		PreparedStatement stmt = connection.prepareStatement(sql);
 		stmt.setNString(1, task.getTask());
 		long millis=System.currentTimeMillis();
 		java.sql.Date date=new java.sql.Date(millis);
 		stmt.setDate(2,date);
+		stmt.setNString(3, task.getUser());
 		stmt.execute();
 		stmt.close();
 	}

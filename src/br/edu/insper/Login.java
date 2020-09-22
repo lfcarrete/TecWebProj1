@@ -52,8 +52,7 @@ public class Login extends HttpServlet {
 			
 			
 			for(User user : users) {
-				System.out.println(user.getUser().equals(localUser));
-				System.out.println(user.getPassword().equals(localPassword));
+				
 				if(user.getUser().equals(localUser) && user.getPassword().equals(localPassword)) {
 				confirm = true;
 				System.out.println("Usuario Confirmado");
@@ -62,6 +61,7 @@ public class Login extends HttpServlet {
 			 
 			
 			if(confirm) {
+				request.setAttribute("currentUser",localUser);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("Lista");
 				dispatcher.forward(request, response);
 			} else {

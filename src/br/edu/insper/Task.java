@@ -6,6 +6,7 @@ public class Task {
 	private Integer id;
 	private String task;
 	private Calendar date;
+	private String user;
 	
 	
 	public Integer getId() {
@@ -25,6 +26,12 @@ public class Task {
 	}
 	public void setDate(Calendar date) {
 		this.date = date;
+	}
+	public String getUser() {
+		return user;
+	}
+	public void setUser(String user) {
+		this.user = user;
 	}
 
 }

@@ -46,9 +46,11 @@ public class Cria extends HttpServlet {
 		// TODO Auto-generated method stub
 		DAO dao;
 		try {
+			
 			dao = new DAO();
 			Task task = new Task();
 			task.setTask(request.getParameter("newtask"));
+			task.setUser(request.getParameter("user"));
 			if(request.getParameter("newtask").length() != 0) {
 				
 				dao.adiciona(task);
@@ -57,6 +59,7 @@ public class Cria extends HttpServlet {
 			
 			List<Task> tasks = dao.getLista();
 			
+			request.setAttribute("user", request.getParameter("user"));
 			request.setAttribute("tasks", tasks);
 			
 			dao.close();

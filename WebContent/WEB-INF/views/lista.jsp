@@ -30,8 +30,9 @@
 	  		
 	  		
 			<tr>
-				<td style="font-size:150%; font-weight: bold;"> Tasks </td>
-				<td style="font-size:150%; font-weight: bold;"> Data de Criação </td>
+				<td style="font-size:150%; font-weight: bold; text-decoration: underline;"> Tasks </td>
+				<td style="font-size:150%; font-weight: bold; text-decoration: underline;"> Data de Criação </td>
+				<td style="font-size:150%; font-weight: bold; text-decoration: underline;"> Criado Por </td>
 			</tr>
 		
 			
@@ -39,6 +40,7 @@
 			 	<tr>
 			 		<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;">${task.task}</td>
 			 		<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;">${task.date.getTime()}</td>
+			 		<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;">${task.user}</td>
 			 		
 			 		<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;">
 				 		<form action='Atualiza'>
@@ -58,13 +60,14 @@
 				<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;">
 				<form action='Cria' method='post'>
 						<input type="text" name="newtask" placeholder="New Task" required>	
-						<input type='submit' value="Cria Task">
+						<input type="text" name="user" value=${user}>
+						<input type='submit' value="Add Task">
 				</form>
 				</td>
 				<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;"></td>
 				<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;"></td>
-				<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;">	
-				</td>
+				<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;"></td>
+				<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;"></td>
 			</tr>
 		</table>
 		

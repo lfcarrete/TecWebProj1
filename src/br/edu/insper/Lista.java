@@ -47,6 +47,12 @@ public class Lista extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DAO dao;
 		try {
+			String currentUser = (String)request.getAttribute("currentUser");
+			
+			if(currentUser != null){
+				request.setAttribute("user", currentUser);
+			}
+			
 			dao = new DAO();
 			
 			List<Task> tasks = dao.getLista();
