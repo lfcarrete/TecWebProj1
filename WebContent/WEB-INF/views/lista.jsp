@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ page import="java.util.*,br.edu.insper.*" %>
+<%@ page import="java.util.*,br.edu.insper.Controller.*" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -52,6 +52,7 @@
 					<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;">
 				 		<form action='Remove' method='post'>
 				 			<input type='hidden' name='id' value=${task.id}>
+				 			<input type='hidden' name='user' value=${user}>
 							<input type='submit' value="Remove Task">
 						</form>
 					</td>

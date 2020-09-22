@@ -1,4 +1,4 @@
-package br.edu.insper;
+package br.edu.insper.mvc.model;
 
 public class User {
 	private int id;

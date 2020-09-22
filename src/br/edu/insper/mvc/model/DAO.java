@@ -1,4 +1,4 @@
-package br.edu.insper;
+package br.edu.insper.mvc.model;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;

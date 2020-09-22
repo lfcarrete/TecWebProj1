@@ -1,4 +1,4 @@
-package br.edu.insper;
+package br.edu.insper.mvc.model;
 
 import java.util.Calendar;
 

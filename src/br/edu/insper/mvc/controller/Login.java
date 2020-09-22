@@ -1,7 +1,6 @@
-package br.edu.insper;
+package br.edu.insper.mvc.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -12,17 +11,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.edu.insper.mvc.model.DAO;
+import br.edu.insper.mvc.model.User;
+
 /**
- * Servlet implementation class Remove
+ * Servlet implementation class Login
  */
-@WebServlet("/Remove")
-public class Remove extends HttpServlet {
+@WebServlet("/Login")
+public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Remove() {
+    public Login() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,6 +34,8 @@ public class Remove extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
@@ -39,18 +43,38 @@ public class Remove extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		DAO dao;
 		try {
 			dao = new DAO();
-			dao.remove(Integer.valueOf(request.getParameter("id")));
 			
-			List<Task> tasks = dao.getLista();
+			String localUser = request.getParameter("user");
+			String localPassword = request.getParameter("password");
+			boolean confirm = false;
+			List<User> users = dao.getUsers();
+			
+			
+			for(User user : users) {
+				System.out.println(localUser);
+				if(user.getUser().equals(localUser) && user.getPassword().equals(localPassword)) {
+				confirm = true;
+				}
+			}
+			
+			
+			if(confirm) {
+				System.out.println("Usuario Confirmado");
+				request.setAttribute("currentUser",localUser);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("Lista");
+				dispatcher.forward(request, response);
+			} else {
+				System.out.println("AQUI");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/views/login.jsp");
+				dispatcher.forward(request, response);
+			}
+			
 			
 			dao.close();
-			
-			request.setAttribute("tasks", tasks);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/lista.jsp");
-			dispatcher.forward(request, response);
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

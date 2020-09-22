@@ -1,6 +1,7 @@
-package br.edu.insper;
+package br.edu.insper.mvc.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,17 +12,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.edu.insper.mvc.model.DAO;
+import br.edu.insper.mvc.model.Task;
+
 /**
- * Servlet implementation class Cadastro
+ * Servlet implementation class Remove
  */
-@WebServlet("/Cadastro")
-public class Cadastro extends HttpServlet {
+@WebServlet("/Remove")
+public class Remove extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Cadastro() {
+    public Remove() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,8 +35,6 @@ public class Cadastro extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/views/cadastro.jsp");
-		dispatcher.forward(request, response);
 	}
 
 	/**
@@ -43,20 +45,15 @@ public class Cadastro extends HttpServlet {
 		DAO dao;
 		try {
 			dao = new DAO();
+			dao.remove(Integer.valueOf(request.getParameter("id")));
 			
-			User user = new User();
-			user.setUser(request.getParameter("user"));
-			user.setPassword(request.getParameter("password"));
-			
-				
-			dao.addUser(user);
-			
-			
-			request.setAttribute("user", user.getUser());
+			List<Task> tasks = dao.getLista();
 			
 			dao.close();
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("Lista");
+			request.setAttribute("user", request.getParameter("user"));
+			request.setAttribute("tasks", tasks);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/lista.jsp");
 			dispatcher.forward(request, response);
 			
 		} catch (ClassNotFoundException e) {
@@ -66,6 +63,7 @@ public class Cadastro extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 
 }

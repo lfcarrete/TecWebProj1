@@ -1,4 +1,4 @@
-package br.edu.insper;
+package br.edu.insper.mvc.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +15,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import br.edu.insper.mvc.model.DAO;
+import br.edu.insper.mvc.model.Task;
 
 /**
  * Servlet implementation class Cria

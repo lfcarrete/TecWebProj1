@@ -1,6 +1,8 @@
-package br.edu.insper;
+package br.edu.insper.mvc.controller;
+
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,17 +13,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.edu.insper.mvc.model.DAO;
+import br.edu.insper.mvc.model.Task;
+
 /**
- * Servlet implementation class Login
+ * Servlet implementation class Lista
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/Lista")
+public class Lista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public Lista() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,8 +36,7 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
-		dispatcher.forward(request, response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -40,39 +44,28 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		doGet(request, response);
+	}
+	
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DAO dao;
 		try {
+			String currentUser = (String)request.getAttribute("currentUser");
+			
+			if(currentUser != null){
+				request.setAttribute("user", currentUser);
+			}
+			
 			dao = new DAO();
 			
-			String localUser = request.getParameter("user");
-			String localPassword = request.getParameter("password");
-			boolean confirm = false;
-			List<User> users = dao.getUsers();
-			
-			
-			for(User user : users) {
-				System.out.println(localUser);
-				if(user.getUser().equals(localUser) && user.getPassword().equals(localPassword)) {
-				confirm = true;
-				}
-			}
-			
-			
-			if(confirm) {
-				System.out.println("Usuario Confirmado");
-				request.setAttribute("currentUser",localUser);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("Lista");
-				dispatcher.forward(request, response);
-			} else {
-				System.out.println("AQUI");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/views/login.jsp");
-				dispatcher.forward(request, response);
-			}
-			
+			List<Task> tasks = dao.getLista();
 			
 			dao.close();
 			
+			request.setAttribute("tasks", tasks);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/lista.jsp");
+			dispatcher.forward(request, response);
+		
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,7 +73,5 @@ public class Login extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
-
 }
