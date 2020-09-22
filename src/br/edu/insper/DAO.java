@@ -70,12 +70,25 @@ public class DAO {
 		stmt.close();
 	}
 	
+	public void addUser (User user) throws SQLException {
+		String sql = "INSERT INTO users (user, password) VALUES (?,?)";
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		stmt.setNString(1, user.getUser());
+		stmt.setNString(2, user.getPassword());
+		stmt.execute();
+		stmt.close();
+	}
+	
 	public void altera (Task task) throws SQLException {
-		String sql = "UPDATE tasks SET " + "task=? WHERE id=?";
+		String sql = "UPDATE tasks SET " + "task=?, criado=?, autor=? WHERE id=?";
 		
 		PreparedStatement stmt = connection.prepareStatement(sql);
 		stmt.setString(1, task.getTask());
-		stmt.setInt(2, task.getId());
+		stmt.setInt(4, task.getId());
+		long millis=System.currentTimeMillis();
+		java.sql.Date date=new java.sql.Date(millis);
+		stmt.setDate(2,date);
+		stmt.setNString(3, task.getUser());
 		stmt.execute();
 		stmt.close();
 	}

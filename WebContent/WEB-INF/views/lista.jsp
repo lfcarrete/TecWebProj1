@@ -32,7 +32,7 @@
 			<tr>
 				<td style="font-size:150%; font-weight: bold; text-decoration: underline;"> Tasks </td>
 				<td style="font-size:150%; font-weight: bold; text-decoration: underline;"> Data de Criação </td>
-				<td style="font-size:150%; font-weight: bold; text-decoration: underline;"> Criado Por </td>
+				<td style="font-size:150%; font-weight: bold; text-decoration: underline;"> Criado/Atualizado Por </td>
 			</tr>
 		
 			
@@ -45,6 +45,7 @@
 			 		<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;">
 				 		<form action='Atualiza'>
 				 			<input type='hidden' name='id' value=${task.id}>
+				 			<input type='hidden' name='user' value=${user}>
 							<input type='submit' value="Atualiza Task">
 						</form>
 					</td>
@@ -60,7 +61,7 @@
 				<td style="padding: 8px; text-align: left; border-bottom: 1px solid #000000;">
 				<form action='Cria' method='post'>
 						<input type="text" name="newtask" placeholder="New Task" required>	
-						<input type="text" name="user" value=${user}>
+						<input type="hidden" name="user" value=${user}>
 						<input type='submit' value="Add Task">
 				</form>
 				</td>

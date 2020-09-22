@@ -22,16 +22,11 @@
 		</style>
 </head>
 <body>
-	<h1>Login</h1>
-	<form action='Login' method='post'>
+	<h1>Cadastro</h1>
+	<form action='Cadastro' method='post'>
 		<input type="text" name='user' placeholder='Username' required><br>
 		<input type="password" name='password' placeholder="password" required><br>
-		<input type='submit' value='Login'>
+		<input type='submit' value='Criar Conta'>
 	</form>
-	
-	<form action='Cadastro'>
-		<input type="submit" value="Cadastrar conta nova">
-	</form>
-	
 </body>
 </html>

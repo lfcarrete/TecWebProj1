@@ -52,19 +52,20 @@ public class Login extends HttpServlet {
 			
 			
 			for(User user : users) {
-				
+				System.out.println(localUser);
 				if(user.getUser().equals(localUser) && user.getPassword().equals(localPassword)) {
 				confirm = true;
-				System.out.println("Usuario Confirmado");
 				}
 			}
-			 
+			
 			
 			if(confirm) {
+				System.out.println("Usuario Confirmado");
 				request.setAttribute("currentUser",localUser);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("Lista");
 				dispatcher.forward(request, response);
 			} else {
+				System.out.println("AQUI");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/views/login.jsp");
 				dispatcher.forward(request, response);
 			}
